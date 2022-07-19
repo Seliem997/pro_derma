@@ -6,7 +6,9 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'https://student.valuxapps.com/api/',
+        baseUrl: 'http://pro-derma.net/api/',
+        // baseUrl: 'https://student.valuxapps.com/api/',
+        // baseUrl: 'http://pro-derma.net/api',
         receiveDataWhenStatusError: true,
       ),
     );
@@ -20,6 +22,10 @@ class DioHelper {
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
+      'User-Agent': 'PostmanRuntime/7.29.2',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Connection': 'keep-alive',
+      'Accept': '*/*',
       'lang': lang,
       'Authorization': token ?? '',
     };
@@ -39,8 +45,13 @@ class DioHelper {
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'lang': lang,
-      'Authorization': token ?? '',
+      'User-Agent': 'PostmanRuntime/7.29.2',
+      // 'Accept-Encoding': 'gzip, deflate, br',
+      'Connection': 'keep-alive',
+      'Accept': '*/*',
+      // 'lang': lang,
+      // 'Authorization': token ?? '',
+      'Postman-Token': token ?? '',
     };
 
     return await dio.post(
@@ -59,6 +70,10 @@ class DioHelper {
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
+      'User-Agent': 'PostmanRuntime/7.29.2',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Connection': 'keep-alive',
+      'Accept': '*/*',
       'lang': lang,
       'Authorization': token ?? '',
     };

@@ -29,16 +29,16 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            if (state.loginModel.status!) {
-              if (kDebugMode) {
-                print(state.loginModel.message);
-              }
+            if (state.loginModel.status!=200) {
+              // if (kDebugMode) {
+              //   print(state.loginModel.message);
+              // }
               if (kDebugMode) {
                 print(state.loginModel.data!.token);
               }
-              showToast(
-                  message: state.loginModel.message!,
-                  state: ToastStates.success);
+              // showToast(
+              //     message: state.loginModel.message!,
+              //     state: ToastStates.success);
 
               CacheHelper.saveData(
                 key: 'token',
@@ -49,10 +49,9 @@ class LoginScreen extends StatelessWidget {
               });
             } else {
               if (kDebugMode) {
-                print(state.loginModel.message);
+                // print(state.loginModel.message);
               }
-              showToast(
-                  message: state.loginModel.message!, state: ToastStates.error);
+              // showToast(message: state.loginModel.message!, state: ToastStates.error);
             }
           }
         },
@@ -95,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-                      verticalSpace(3),
+                      verticalSpace(5),
                       defaultFormField(
                         controller: passwordController,
                         type: TextInputType.visiblePassword,
@@ -127,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                         condition: state is! LoginLoadingState,
                         builder: (context) => defaultButton(
                           function: () {
-                            // showToast(message: 'message', state: ToastStates.error);  //*************************-----------------------**************************
+                            showToast(message: 'message', state: ToastStates.error);  //*************************-----------------------**************************
 
                             if (formKey.currentState!.validate()) {
                               LoginCubit.get(context).userLogin(

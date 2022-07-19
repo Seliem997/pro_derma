@@ -54,6 +54,10 @@ Widget defaultButton({
   return Container(
     height: height,
     width: width,
+    decoration: BoxDecoration(
+      color: backgroundButton,
+      borderRadius: BorderRadius.circular(radius),
+    ),
     child: MaterialButton(
       onPressed: function,
       child: Text(
@@ -65,10 +69,6 @@ Widget defaultButton({
           letterSpacing: 1,
         ),
       ),
-    ),
-    decoration: BoxDecoration(
-      color: backgroundButton,
-      borderRadius: BorderRadius.circular(radius),
     ),
   );
 }
@@ -126,6 +126,42 @@ Widget defaultBackButton(context){
           Navigator.pop(context);
         },
       )
+    ),
+  );
+}
+
+Widget defaultBorderButtonWithIcon({
+  double width = double.infinity,
+  double? height,
+  double elevation = 5,
+  Color? textColor ,
+  double? labelSize ,
+  Color? backgroundButton ,
+  bool isUpperCase = false,
+  BorderRadiusGeometry ? borderRadius,
+  required VoidCallback onPressed,
+  required String labelText,
+  required Widget icon,
+}) {
+  return SizedBox(
+    height: height ?? 40,
+    width: width,
+    child: ElevatedButton.icon(
+      onPressed: onPressed,
+      label:  Text(isUpperCase ? labelText.toUpperCase() : labelText),
+      icon: icon,
+      style: ElevatedButton.styleFrom(
+          primary: backgroundButton ?? kDefaultColor,
+          onPrimary: textColor ?? kDefaultSecondColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: borderRadius ?? BorderRadius.circular(50),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 2.w),
+          textStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: labelSize ?? 20,
+          )
+      ),
     ),
   );
 }

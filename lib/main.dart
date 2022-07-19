@@ -8,6 +8,7 @@ import 'package:pro_derma/shared/styles/themes.dart';
 import 'package:sizer/sizer.dart';
 
 import 'layout/cubit/cubit.dart';
+import 'tests.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: lightTheme,
               darkTheme: darkTheme,
+              // home: const Tests(),
               home: const SplashScreen(),
             );
           }

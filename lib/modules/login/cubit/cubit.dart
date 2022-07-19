@@ -25,7 +25,7 @@ class LoginCubit extends Cubit<LoginStates> {
       (value) {
         loginModel = LoginModel.fromJason(value.data);
         print(loginModel.status);
-        print(loginModel.message);
+        // print(loginModel.message);
         print(loginModel.data?.token);
         print(value);
         emit(LoginSuccessState(loginModel));
@@ -33,7 +33,7 @@ class LoginCubit extends Cubit<LoginStates> {
     ).catchError(
       (onError) {
         print(onError.toString());
-        print('error');
+        print('error in user login');
         emit(
           LoginErrorState(onError.toString()),
         );

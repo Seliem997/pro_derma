@@ -2,7 +2,7 @@ const LOGIN = 'login';
 
 const REGISTER = 'register';
 
-const HOME = 'home';
+const HOME = 'products';
 
 const GET_CATEGORIES = 'categories';
 

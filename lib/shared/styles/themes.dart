@@ -46,7 +46,7 @@ ThemeData lightTheme = ThemeData(
     color: Colors.black,
   ),
   primarySwatch: Colors.blue,
-  fontFamily: 'poppins',
+  fontFamily: 'Airbnb',
 
 );
 
@@ -98,6 +98,6 @@ ThemeData darkTheme= ThemeData(
     color: Colors.white,
   ),
   primarySwatch: Colors.blue,
-  fontFamily: 'poppins',
+  fontFamily: 'Airbnb',
 
 );
