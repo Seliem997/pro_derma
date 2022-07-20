@@ -24,9 +24,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   bool isLast = false;
 
   void submit(){
-    CacheHelper.saveData(key: 'OnBoarding', value: true).then((value) {
+    CacheHelper.saveData(key: 'onBoarding', value: 'true').then((value) {
       if(value){
-        navigateAndFinish(context, LoginScreen());
+        navigateAndFinish(context, const LoginScreen());
       }
     });
 

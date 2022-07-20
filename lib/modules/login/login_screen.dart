@@ -10,7 +10,6 @@ import '../../shared/components/default_buttons.dart';
 import '../../shared/components/navigate.dart';
 import '../../shared/components/show_toast.dart';
 import '../../shared/network/local/cache_helper.dart';
-import '../../shared/styles/colors.dart';
 import '../register/register_screen.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
@@ -29,29 +28,27 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            if (state.loginModel.status!=200) {
-              // if (kDebugMode) {
-              //   print(state.loginModel.message);
-              // }
+            if (state.loginModel.status == 200) {
               if (kDebugMode) {
+                print('token in login success when code 200 is =');
                 print(state.loginModel.data!.token);
               }
-              // showToast(
-              //     message: state.loginModel.message!,
-              //     state: ToastStates.success);
 
               CacheHelper.saveData(
                 key: 'token',
                 value: state.loginModel.data!.token,
               ).then((value) {
                 token = state.loginModel.data!.token;
+                print('in listener of login then after save data');
+                showToast(message: 'Login Success', state: ToastStates.success);
                 navigateAndFinish(context, const AppLayoutView());
               });
             } else {
+              showToast(message: state.loginModel.message!, state: ToastStates.error);
               if (kDebugMode) {
-                // print(state.loginModel.message);
+                print('Code error number is ');
+                print(state.loginModel.status);
               }
-              // showToast(message: state.loginModel.message!, state: ToastStates.error);
             }
           }
         },
