@@ -8,13 +8,12 @@ class DioHelper {
       BaseOptions(
         baseUrl: 'http://pro-derma.net/api/',
         // baseUrl: 'https://student.valuxapps.com/api/',
-        // baseUrl: 'http://pro-derma.net/api',
         receiveDataWhenStatusError: true,
       ),
     );
   }
 
-  static Future<Response> getData({
+  static Future<Response>  getData({
     required String url,
     Map<String, dynamic>? query,
     String lang = 'en',
@@ -23,11 +22,9 @@ class DioHelper {
     dio.options.headers = {
       'Content-Type': 'application/json',
       'User-Agent': 'PostmanRuntime/7.29.2',
-      'Accept-Encoding': 'gzip, deflate, br',
       'Connection': 'keep-alive',
       'Accept': '*/*',
-      'lang': lang,
-      'Authorization': token ?? '',
+      'Postman-Token': token ?? '',
     };
 
     return await dio.get(
@@ -46,11 +43,8 @@ class DioHelper {
     dio.options.headers = {
       'Content-Type': 'application/json',
       'User-Agent': 'PostmanRuntime/7.29.2',
-      // 'Accept-Encoding': 'gzip, deflate, br',
       'Connection': 'keep-alive',
       'Accept': '*/*',
-      // 'lang': lang,
-      // 'Authorization': token ?? '',
       'Postman-Token': token ?? '',
     };
 

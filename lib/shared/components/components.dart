@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:pro_derma/shared/styles/colors.dart';
 import 'package:sizer/sizer.dart';
-
 
 Widget defaultFormField({
   required TextEditingController controller,
@@ -11,58 +9,132 @@ Widget defaultFormField({
   required IconData prefixIcn,
   required FormFieldValidator validate,
   Function(dynamic)? onSubmit,
-  Function(dynamic)? onChange,
-  GestureTapCallback? tap,
-  bool isPassword= false,
+  // Function(dynamic)? onChange,
+  // GestureTapCallback? tap,
+  bool isPassword = false,
   IconData? suffixIcn,
   VoidCallback? suffixPressed,
   InputBorder? border,
-  Color? iconColor,
+  Color iconColor = kDefaultColor,
 }) =>
+//     TextFormField(
+//   controller: controller,
+//   keyboardType: type,
+//   onFieldSubmitted: onSubmit,
+//   onChanged: onChange,
+//   onTap: tap,
+//   validator: validate,
+//   obscureText: isPassword,
+//   decoration: InputDecoration(
+//     filled: true,
+//     fillColor: Colors.white,
+//     contentPadding: EdgeInsetsDirectional.only(start: 5.w, bottom: 2.h),
+//     labelText: label,
+//     labelStyle: TextStyle(color: kDefaultColor.withOpacity(.6)),
+//     prefixIcon: Icon(
+//       prefixIcn,
+//       color: iconColor,
+//     ),
+//     suffixIcon: suffixIcn != null
+//         ? IconButton(
+//       onPressed: suffixPressed,
+//       icon: Icon(
+//         suffixIcn,
+//       ),
+//     )
+//         : null,
+//     border: border ??
+//         OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+//     /*enabledBorder: const OutlineInputBorder(
+//           borderSide: BorderSide.none,
+//         ),
+//         focusedBorder: const OutlineInputBorder(
+//           borderSide: BorderSide.none,
+//         ),
+//         contentPadding:const EdgeInsets.symmetric(vertical: 15, horizontal: 20),*/
+//   ),
+// );
     TextFormField(
-      controller: controller,
       keyboardType: type,
+      controller: controller,
       onFieldSubmitted: onSubmit,
-      onChanged: onChange,
-      onTap: tap,
+      // onChanged: onChange,
+      // onTap: tap,
       validator: validate,
       obscureText: isPassword,
+      style: TextStyle(
+          fontSize: 14.sp,
+          color: Colors.black,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.normal,
+      ),
       decoration: InputDecoration(
-        contentPadding: EdgeInsetsDirectional.only(start: 10.w,bottom: 5.h),
-        labelText: label,
-        labelStyle: TextStyle(color: kDefaultColor.withOpacity(.6)),
+        fillColor: Colors.white,
+        filled: true,
         prefixIcon: Icon(
           prefixIcn,
           color: iconColor,
         ),
-        suffixIcon: suffixIcn!=null ? IconButton(
-          onPressed: suffixPressed,
-          icon: Icon(
-            suffixIcn,
-          ),
-        ) : null ,
-        border: border?? OutlineInputBorder(borderRadius: BorderRadius.circular(25)) ,
+        suffixIcon: suffixIcn != null
+            ? IconButton(
+                onPressed: suffixPressed,
+                icon: Icon(
+                  suffixIcn,
+                  color: iconColor,
+                ),
+              )
+            : null ,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius:BorderRadius.circular(25),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius:BorderRadius.circular(25),
+
+        ),
+        border: OutlineInputBorder(
+            borderRadius:BorderRadius.circular(25)
+        ),
+
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
+        hintText: label,
+        hintStyle: TextStyle(
+          color: KColor.tertiary,
+          fontSize: 12.sp,
+          fontFamily: 'Poppins',
+        ),
       ),
     );
 
-Widget verticalSpace(double height) => SizedBox(height: height.h,);
-Widget horizontalSpace(double width) => SizedBox(width: width.w,);
+Widget verticalSpace(double height) => SizedBox(
+      height: height.h,
+    );
+Widget horizontalSpace(double width) => SizedBox(
+      width: width.w,
+    );
 
-
-Text buildTextHeader({required String text, Color? color,double? fontSize,bool isBold = true,}) {
+Text buildTextHeader({
+  required String text,
+  Color? color,
+  double? fontSize,
+  bool isBold = true,
+}) {
   return Text(
     text,
     maxLines: 2,
     overflow: TextOverflow.ellipsis,
     style: TextStyle(
       color: color,
-      fontSize: fontSize ?? 20.sp ,
+      fontSize: fontSize ?? 20.sp,
       fontWeight: isBold == true ? FontWeight.bold : FontWeight.normal,
       fontFamily: 'poppins',
       letterSpacing: 1.0,
     ),
   );
 }
+
 Text buildTextBody({
   required String text,
   Color? color,
@@ -74,13 +146,38 @@ Text buildTextBody({
   return Text(
     text,
     maxLines: maxLines,
-    overflow: isOverflew? TextOverflow.ellipsis : null,
-    textAlign: isCenter==null ? TextAlign.center : TextAlign.start,
+    overflow: isOverflew ? TextOverflow.ellipsis : null,
+    textAlign: isCenter == null ? TextAlign.center : TextAlign.start,
     style: TextStyle(
       color: color ?? Colors.blueGrey,
       fontSize: fontSize ?? 12.sp,
     ),
   );
+}
+
+Container buildTextField(TextEditingController nameController) {
+  return Container(
+      height: 5.6.h,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          border: Border.all(color: KColor.lightGrayy),
+          color: KColor.white,
+          borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding:
+        EdgeInsets.only(left: 3.w,top: 2.h),
+        child: TextField(
+          style: TextStyle(fontWeight: FontWeight.w500),
+          controller: nameController,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Enter Name',
+              hintStyle: TextStyle(
+                fontFamily: 'Poppins',
+              )),
+        ),
+      ));
 }
 
 
@@ -116,14 +213,13 @@ Text buildTextBody({
 //     ],
 //   );
 // }
-
-
+/*
 
 PreferredSizeWidget defaultAppBar({
   required context,
   required String title,
   List<Widget>? actions,
-}){
+}) {
   return AppBar(
     title: Text(
       title,
@@ -131,7 +227,7 @@ PreferredSizeWidget defaultAppBar({
     actions: actions,
   );
 }
-
+*/
 
 
 Widget? widget;

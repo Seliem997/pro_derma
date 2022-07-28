@@ -33,13 +33,11 @@ class LoginScreen extends StatelessWidget {
                 print('token in login success when code 200 is =');
                 print(state.loginModel.data!.token);
               }
-
               CacheHelper.saveData(
                 key: 'token',
                 value: state.loginModel.data!.token,
               ).then((value) {
                 token = state.loginModel.data!.token;
-                print('in listener of login then after save data');
                 showToast(message: 'Login Success', state: ToastStates.success);
                 navigateAndFinish(context, const AppLayoutView());
               });
@@ -98,8 +96,7 @@ class LoginScreen extends StatelessWidget {
                         label: 'Enter Password',
                         isPassword: LoginCubit.get(context).isPassword,
                         prefixIcn: Icons.lock_outlined,
-                        suffixIcn:
-                            LoginCubit.get(context).suffixPasswordVisible,
+                        suffixIcn: LoginCubit.get(context).suffixPasswordVisible,
                         suffixPressed: () {
                           LoginCubit.get(context).changePasswordVisibility();
                         },
@@ -123,7 +120,6 @@ class LoginScreen extends StatelessWidget {
                         condition: state is! LoginLoadingState,
                         builder: (context) => defaultButton(
                           function: () {
-                            showToast(message: 'message', state: ToastStates.error);  //*************************-----------------------**************************
 
                             if (formKey.currentState!.validate()) {
                               LoginCubit.get(context).userLogin(

@@ -5,53 +5,6 @@ import 'package:sizer/sizer.dart';
 import '../../../shared/components/components.dart';
 
 
-List<String> services = [
-  'IT Services',
-  'Smart Home',
-  'Marketing',
-  'Call Center',
-  // 'Shipping',
-];
-
-List<String> servicesImageCat = [
-  'technical-support_cat',
-  'smart-tv_cat',
-  'social-media_cat',
-  'call-center_cat',
-  // 'Shipping',
-];
-
-List<Widget> servicesOnTap = [
-
-  // const ShippingView(),
-];
-
-
-List<String> popularImage = [
-  'popular1',
-  'popular2',
-  'popular3',
-  'popular4',
-];
-
-
-List<String> popularHeader = [
-  'Security Cameras',
-  'Marketing',
-  'Smart Home',
-  'Call Center',
-];
-
-List<String> popularBody = [
-  'Recommended Service.',
-  'Full advertising & Promotion process.',
-  'Brilliant is one of the world\'s largest home automation.',
-  'comprehensive development of the communication.',
-];
-
-
-
-
 
 Widget popularItemsList(BuildContext context, index,{required GestureTapCallback onTap}) {
   return GestureDetector(
@@ -64,9 +17,9 @@ Widget popularItemsList(BuildContext context, index,{required GestureTapCallback
           height: 25.h,
           margin: EdgeInsetsDirectional.only(end: 4.w),
           decoration: BoxDecoration(
-            image: DecorationImage(
+            image: const DecorationImage(
               image: AssetImage(
-                'assets/images/${popularImage[index]}.png',
+                'assets/images/popularImage[index].png',
               ),
               fit: BoxFit.cover,
             ),
@@ -85,7 +38,7 @@ Widget popularItemsList(BuildContext context, index,{required GestureTapCallback
         SizedBox(
           width: 41.w,
           child: buildTextHeader(
-            text: popularHeader[index],
+            text: 'popularHeader[index]',
             fontSize: 13.5.sp,
           ),
         ),
@@ -93,7 +46,7 @@ Widget popularItemsList(BuildContext context, index,{required GestureTapCallback
         SizedBox(
           width: 35.w,
           child: buildTextBody(
-            text: popularBody[index],
+            text: 'popularBody[index]',
             isCenter: false,
             maxLines: 3,
             isOverflew: true,

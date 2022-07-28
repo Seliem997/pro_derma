@@ -42,6 +42,8 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   dio: ^4.0.6
   fluttertoast: ^8.0.9
+  dot_navigation_bar: ^1.0.1+4
+
 
 
 
@@ -86,6 +88,22 @@ flutter:
      - family: Airbnb
        fonts:
          - asset: assets/fonts/AirbnbCereal_W_Md.otf
+     - family: Poppins
+       fonts:
+         - asset: assets/fonts/Poppins-Black.ttf
+           weight: 900
+         - asset: assets/fonts/Poppins-Bold.ttf
+           weight: 800
+         - asset: assets/fonts/Poppins-SemiBold.ttf
+           weight: 700
+         - asset: assets/fonts/Poppins-Light.ttf
+           weight: 300
+         - asset: assets/fonts/Poppins-ExtraLight.ttf
+           weight: 200
+         - asset: assets/fonts/Poppins-Medium.ttf
+           weight: 500
+         - asset: assets/fonts/Poppins-Regular.ttf
+           weight: 400
 
   #   - family: Trajan Pro
   #     fonts:

@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pro_derma/modules/register/cubit/states.dart';
@@ -25,19 +25,24 @@ class RegisterCubit extends Cubit<RegisterStates>{
     DioHelper.postData(
       url: REGISTER,
       data: {
-        'name' : name,
+        'username' : name,
         'email' : email,
         'phone' : phone,
         'password' : password,
       },
     ).then((value) {
-      print(value.data);
+      if (kDebugMode) {
+        print('data used in register is =>');
+        print(value.data);
+      }
       loginModel = LoginModel.fromJson(value.data);
       emit(RegisterSuccessState(loginModel));
 
     }).catchError((error){
-
-      print(error.toString());
+      if (kDebugMode) {
+        print('error in cubit in user register is =>');
+        print(error.toString());
+      }
       emit(RegisterErrorState(error.toString()));
 
     });

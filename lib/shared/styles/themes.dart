@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 
 import 'colors.dart';
 
 ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: kLightGreyColor,
+  brightness: Brightness.light,
   appBarTheme: const AppBarTheme(
     titleSpacing: 20,
     systemOverlayStyle: SystemUiOverlayStyle(
@@ -31,15 +33,41 @@ ThemeData lightTheme = ThemeData(
     type: BottomNavigationBarType.fixed,
     backgroundColor: Colors.white,
   ),
-  textTheme: const TextTheme(
-    bodyText1: TextStyle(
-      fontSize: 24,
-      fontWeight: FontWeight.bold,
-      color: Colors.black,
+  textTheme: TextTheme(
+    headline1: TextStyle(
+      fontSize: 44.sp,
+      fontWeight: FontWeight.w600,
+      color: const Color(0xFF1A191D),
+    ),
+    headline2: TextStyle(
+      fontSize: 24.sp,
+      fontWeight: FontWeight.w500,
+      color: const Color(0xFF1A191D),
+    ),
+    headline3: TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w600,
+      color: const Color(0xFF1A191D),
     ),
     subtitle1: TextStyle(
-      fontSize: 18,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w500,
+      color: const Color(0xFF1A191D),
+    ),
+    subtitle2: TextStyle(
+      fontSize: 13.sp,
+      fontWeight: FontWeight.w500,
+      color: const Color(0xFF1A191D),
+    ),
+    bodyText1: TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w400,
+      color: const Color(0xFF1A191D),
+    ),
+    bodyText2: TextStyle(
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w500,
+      color: const Color(0xFF1A191D),
     ),
   ),
   iconTheme: const IconThemeData(

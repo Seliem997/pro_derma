@@ -6,7 +6,6 @@ import 'package:pro_derma/shared/network/local/cache_helper.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../layout/app_layout_view.dart';
 import '../../../shared/components/default_buttons.dart';
 import '../../../shared/components/navigate.dart';
 import '../../../shared/styles/colors.dart';
@@ -53,7 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var boardController=PageController();
+    var boardController = PageController();
 
     return Stack(
       children: [

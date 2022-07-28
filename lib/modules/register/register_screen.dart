@@ -29,31 +29,26 @@ class RegisterScreen extends StatelessWidget {
       child: BlocConsumer<RegisterCubit, RegisterStates>(
         listener: (context, state) {
           if(state is RegisterSuccessState){
-            if( state.loginModel.status!=200){
-
+            if( state.loginModel.status == 200){
               if (kDebugMode) {
-                // print(state.loginModel.message);
-              }
-              if (kDebugMode) {
+                print('token in register success when code 200 is =');
                 print(state.loginModel.data!.token);
               }
-              // showToast(message: state.loginModel.message!, state: ToastStates.success);
+              showToast(message: 'Done', state: ToastStates.success);
 
               CacheHelper.saveData(
                 key: 'token',
                 value: state.loginModel.data!.token,
               ).then((value) {
-
                 token = state.loginModel.data!.token;
                 navigateAndFinish(context, const AppLayoutView());
-
               });
-
             }else{
-
-              // print(state.loginModel.message);
-
-              // showToast(message: state.loginModel.message!, state: ToastStates.error);
+              if (kDebugMode) {
+                print('Code error number is ');
+                print(state.loginModel.status);
+              }
+              showToast(message: state.loginModel.message!, state: ToastStates.error);
             }
           }
         },
@@ -144,6 +139,16 @@ class RegisterScreen extends StatelessWidget {
                         }
                         return null;
                       },
+                      onSubmit: (value){
+                        if(formKey.currentState!.validate()){
+                          RegisterCubit.get(context).userRegister(
+                            email : emailController.text,
+                            name : nameController.text,
+                            phone : phoneController.text,
+                            password : passwordController.text,
+                          );
+                        }
+                      }
                     ),
 
                     verticalSpace(7),
@@ -154,8 +159,8 @@ class RegisterScreen extends StatelessWidget {
                         function: (){
                           if(formKey.currentState!.validate()){
                             RegisterCubit.get(context).userRegister(
-                                email : emailController.text,
                                 name : nameController.text,
+                                email : emailController.text,
                                 phone : phoneController.text,
                                 password : passwordController.text,
                             );

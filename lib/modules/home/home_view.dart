@@ -1,58 +1,97 @@
-
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:pro_derma/modules/on_boarding/on_boarding_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pro_derma/layout/cubit/states.dart';
+import 'package:pro_derma/modules/favorites/widgets/favorite_screen.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../layout/cubit/cubit.dart';
 import '../../shared/components/components.dart';
-import '../../shared/components/navigate.dart';
-
+import '../../shared/styles/colors.dart';
+import 'widgets/home_screen.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var listController = PageController();
     return Scaffold(
-
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsetsDirectional.only(start: 3.w,end: 3.w,top: 2.h),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                verticalSpace(1.5),
-                Row(
-                  children: [
-                    buildTextHeader(text: 'Services'),
-                    const Spacer(),
-                    InkWell(
-                      onTap: (){
-                        navigateTo(context, const OnBoardingView());
-                      },
-                      child: buildTextBody(
-                        text: 'See all',
-                      ),
-                    ),
-                    // horizontalSpace(2),
-                  ],
-                ),
-                verticalSpace(1),
-                buildTextHeader(text: 'Popular'),
-                verticalSpace(1),
-
-                // buildRequestServiceList(),
-                // const Expanded(
-                //   child: TabBarDemo(),
-                // ),
-              ],
-            ),
-          ),
+      appBar: AppBar(
+        actions: [
+          SmoothPageIndicator(
+            controller: listController,
+            count: 10,
+        effect: ScrollingDotsEffect(
+          activeStrokeWidth: 2.6,
+          activeDotScale: 1.3,
+          maxVisibleDots: 5,
+          radius: 8,
+          spacing: 10,
+          dotHeight: 12,
+          dotWidth: 12,
         ),
+            // effect: ExpandingDotsEffect(
+            //   activeDotColor: kDefaultColor,
+            //   dotColor: Colors.orange.shade200,
+            //   dotHeight: 10,
+            //   dotWidth: 10,
+            //   expansionFactor: 4,
+            //   spacing: 2.w,
+            // ),
+          ),
+        ],
+      ),
+      // body: ListView.builder(
+      //   physics: const BouncingScrollPhysics(),
+      //     controller: listController,
+      //     itemBuilder: (context,index){
+      //       // return SizedBox(
+      //       //   width: 95.w,
+      //       //   height: 85.h,
+      //       //   child: HomeScreen(),
+      //       // );
+      //       return ConstrainedBox(
+      //           constraints: BoxConstraints(
+      //             minWidth: 95.w,
+      //             minHeight: 60.h,
+      //             maxHeight: 70.h,
+      //             maxWidth: 99.w,
+      //           ),
+      //           child: HomeScreen());
+      //       // return UnconstrainedBox(
+      //       //
+      //       //   child: LimitedBox(
+      //       //       maxWidth: 90.w,
+      //       //       maxHeight: 80.h,
+      //       //       child: HomeScreen()),
+      //       // );
+      // },
+      //     // separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.red,),
+      //     itemCount: 3,
+      //   scrollDirection: Axis.horizontal,
+      // ),
+      body: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state){},
+        builder: (context, state){
+          var cubit= AppCubit.get(context);
+          return ConditionalBuilder(
+            condition: cubit.homeModel != null || cubit.dataString != null,
+            builder: (context) {
+              return PageView.builder(
+                physics: const BouncingScrollPhysics(),
+                controller: listController,
+                itemBuilder: (context, index) => const HomeScreen(),
+                itemCount: 10,
+                onPageChanged: (int index) {},
+              );
+            },
+            fallback: (context) => const Center(child: CircularProgressIndicator(),),
+          );
+        }
       ),
     );
   }
-
-
 }
 
