@@ -5,11 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pro_derma/layout/cubit/states.dart';
 import 'package:pro_derma/models/home_model.dart';
 import 'package:pro_derma/modules/cart/cart_view.dart';
+import 'package:pro_derma/modules/favorite/favorite_view.dart';
 import 'package:pro_derma/shared/network/end_points.dart';
 import 'package:pro_derma/shared/network/remote/dio_helper.dart';
 
-import '../../modules/favorites/favorite_view.dart';
 import '../../modules/home/home_view.dart';
+import '../../modules/profile/profile_view.dart';
 import '../../modules/settings/settings_view.dart';
 import '../../shared/network/local/cache_helper.dart';
 
@@ -19,13 +20,14 @@ class AppCubit extends Cubit<AppStates>{
   static AppCubit get(context) => BlocProvider.of(context);
 
 //-------------------------------------------- Create Navigation Bar --------------------
-  int currentIndex = 1;
+  int currentIndex = 0;
 
   List<Widget> bottomScreens=[
-    const FavoriteView(),
     const HomeView(),
-    const SettingsView(),
+    const FavoriteView(),
     const CartView(),
+    const ProfileView(),
+    const SettingsView(),
   ];
 
   void changeBottom(int index){

@@ -5,29 +5,36 @@ import '../../../layout/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/components/constants.dart';
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key}) : super(key: key);
+class FavoriteScreen extends StatelessWidget {
+  const FavoriteScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          height: 40.h,
-          width: 50.w,
+          height: 20.h,
+          width: 30.w,
           color: Colors.pink,
           child: GestureDetector(
             onTap: (){
               signOut(context);
             },
             child: Text(
-              'Cart Screen',
+              'Favorite Screen',
               style: TextStyle(
-                fontSize: 20.sp,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
+        ),
+        verticalSpace(5),
+        IconButton(
+          onPressed: (){
+            AppCubit.get(context).changeAppMode();
+          },
+          icon: const Icon(Icons.brightness_4_outlined),
         ),
       ],
     );

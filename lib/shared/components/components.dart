@@ -155,7 +155,7 @@ Text buildTextBody({
   );
 }
 
-Container buildTextField(TextEditingController nameController) {
+Container buildTextField(TextEditingController nameController,String hintText,context) {
   return Container(
       height: 5.6.h,
       width: double.infinity,
@@ -165,17 +165,15 @@ Container buildTextField(TextEditingController nameController) {
           borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding:
-        EdgeInsets.only(left: 3.w,top: 2.h),
+        EdgeInsets.only(left: 3.w,top:2.5.h),
         child: TextField(
-          style: TextStyle(fontWeight: FontWeight.w500),
+          style: const TextStyle(fontWeight: FontWeight.w500),
           controller: nameController,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: 'Enter Name',
-              hintStyle: TextStyle(
-                fontFamily: 'Poppins',
-              )),
+              hintText: hintText,
+              hintStyle: Theme.of(context).textTheme.bodyText1),
         ),
       ));
 }

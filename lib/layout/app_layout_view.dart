@@ -66,11 +66,7 @@ class AppLayoutView extends StatelessWidget {
                 },
                 items: [
                   DotNavigationBarItem(
-                    icon: const Icon(Icons.person_outline_rounded),
-                    selectedColor: Colors.white,
-                  ),
-                  DotNavigationBarItem(
-                    icon: const Icon(Icons.home_rounded),
+                    icon: const Icon(Icons.home_outlined),
                     selectedColor: Colors.white,
                   ),
                   DotNavigationBarItem(
@@ -82,7 +78,11 @@ class AppLayoutView extends StatelessWidget {
                     selectedColor: Colors.white,
                   ),
                   DotNavigationBarItem(
-                    icon: const Icon(Icons.search),
+                    icon: const Icon(Icons.person_outline_rounded),
+                    selectedColor: Colors.white,
+                  ),
+                  DotNavigationBarItem(
+                    icon: const Icon(Icons.settings_outlined),
                     selectedColor: Colors.white,
                   ),
 

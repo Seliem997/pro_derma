@@ -111,13 +111,13 @@ ThemeData darkTheme= ThemeData(
       backgroundColor: kDefaultNightModeColor,
   ),
 
-  textTheme: const TextTheme(
-      bodyText1: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-      ),
-      subtitle1: TextStyle(
+  textTheme: TextTheme(
+    bodyText1: TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w400,
+      color: const Color(0xFF1A191D),
+    ),
+      subtitle1: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w500,
       ),
