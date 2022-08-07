@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pro_derma/layout/app_layout_view.dart';
+import 'package:pro_derma/layout/cubit/app_layout_screen.dart';
 import 'package:pro_derma/layout/cubit/states.dart';
 import 'package:pro_derma/modules/on_boarding/on_boarding_view.dart';
 import 'package:pro_derma/shared/network/local/cache_helper.dart';
@@ -10,22 +11,27 @@ import 'package:sizer/sizer.dart';
 
 import 'layout/cubit/cubit.dart';
 import 'modules/login/login_screen.dart';
+import 'modules/register/register_screen.dart';
 import 'modules/splash/widgets/splash_screen.dart';
 import 'shared/components/constants.dart';
 
-void main() async{
+void main(context) async{
   WidgetsFlutterBinding.ensureInitialized();
 
   await CacheHelper.init();
   DioHelper.init();
 
-  bool isDarkMode = CacheHelper.returnData(key: 'isDarkMode');
+  bool? darkFromShared = CacheHelper.returnData(key: 'isDarkMode');
+  if(darkFromShared != null){
+    isDarkMode = darkFromShared;
+  }
 
   String? onBoarding = CacheHelper.returnData(key: 'onBoarding');
-  token = CacheHelper.returnData(key: 'token') ;
+  String? mainToken = CacheHelper.returnData(key: 'token') ;
+  print("tToo From shared is $mainToken");
   Widget startWidget;
   if( onBoarding != null ){
-    if(token != null ){
+    if(mainToken != null ){
       startWidget = const AppLayoutView();
     }else{
       startWidget = const LoginScreen();
@@ -34,19 +40,20 @@ void main() async{
     startWidget = const OnBoardingView();
   }
 
-  runApp( MyApp(startWidget,isDarkMode));
+  runApp( MyApp(startWidget,isDarkMode,tokenMain: mainToken,));
 }
 
 class MyApp extends StatelessWidget {
   final Widget startWidget;
   final bool isDarkMode;
+  final String? tokenMain;
 
-  const MyApp(this.startWidget,this.isDarkMode, {Key? key}) : super(key: key);
+  const MyApp(this.startWidget,this.isDarkMode, {Key? key,this.tokenMain}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AppCubit()..changeAppMode(modeFromShared: isDarkMode)..getHomeData(),
+      create: (BuildContext context) => AppCubit()..changeAppMode(modeFromShared: isDarkMode)/*..getHomeData(userToken: tokenMain)*/,
       child: BlocConsumer<AppCubit,AppStates>(
         listener: (context, state){},
         builder: (context, state) {
@@ -57,10 +64,11 @@ class MyApp extends StatelessWidget {
               theme: lightTheme,
               darkTheme: darkTheme,
               themeMode: AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-              home: const AppLayoutView(),
+              // home: const AppLayoutView(),
+              // home: const RegisterScreen(),
               // home: const SplashScreen(),
               // home: onBoarding ? const LoginScreen() : const OnBoardingView(),
-              // home: startWidget,
+              home: startWidget,
             );
           }
         );

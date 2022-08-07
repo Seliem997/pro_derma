@@ -76,7 +76,7 @@ class HomeView extends StatelessWidget {
         builder: (context, state){
           var cubit= AppCubit.get(context);
           return ConditionalBuilder(
-            condition: cubit.homeModel != null || cubit.dataString != null,
+            condition: cubit.homeModel != null /*|| cubit.dataString != null*/,
             builder: (context) {
               return PageView.builder(
                 physics: const BouncingScrollPhysics(),

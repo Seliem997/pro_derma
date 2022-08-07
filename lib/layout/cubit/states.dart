@@ -6,6 +6,7 @@ class AppChangeBottomState extends AppStates {}
 
 class AppChangeModeState extends AppStates {}
 
+class AppChangeDrawerState extends AppStates {}
 
 class AppChangeLanguageState extends AppStates {}
 

@@ -8,6 +8,7 @@ import 'package:pro_derma/modules/cart/cart_view.dart';
 import 'package:pro_derma/modules/favorite/favorite_view.dart';
 import 'package:pro_derma/shared/network/end_points.dart';
 import 'package:pro_derma/shared/network/remote/dio_helper.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../modules/home/home_view.dart';
 import '../../modules/profile/profile_view.dart';
@@ -36,6 +37,25 @@ class AppCubit extends Cubit<AppStates>{
 
     emit(AppChangeBottomState());
   }
+//-------------------------------------------- Get Data Of Product in Home Screen -------
+
+  double xOffset= 0;
+  double yOffset= 0;
+  bool isDrawerOpen= false;
+
+  void changeSideBarDrawer(){
+    if(isDrawerOpen){
+      xOffset= 0;
+      yOffset= 0;
+      isDrawerOpen= false;
+      emit(AppChangeDrawerState());
+    }else{
+      xOffset = 100.w - 120;
+      yOffset = 100.h /5;
+      isDrawerOpen = true;
+      emit(AppChangeDrawerState());
+    }
+  }
 //---------------------------------------------- Change App Mode To Dark Mode -------------
   bool isDark = false;
 
@@ -55,21 +75,20 @@ class AppCubit extends Cubit<AppStates>{
 //-------------------------------------------- Get Data Of Product in Home Screen -------
 
   HomeModel? homeModel;
-  String? dataString;
-void getHomeData(){
+void getHomeData({String? userToken}){
     emit(AppLayoutLoadingState());
 
-    DioHelper.getData(url: HOME)
+    DioHelper.getData(url: HOME,token: userToken)
         .then((value) {
-          // homeModel = HomeModel.fromJson(value.data);
-          // print(homeModel.toString());
-      dataString = value.data;
-      print('response from Api is ${dataString}');
-          // print(value.data.toString());
+          homeModel = HomeModel.fromJson(value.data);
+          print('homeModel.toString()${homeModel.toString()}');
+          print('homeModel!.dataModel[0].title${homeModel!.dataModel[0].title}');
+          print('value.data${value.data}');
+          print('value.data.toString()${value.data.toString()}');
           emit(AppLayoutSuccessStates());
 
     }).catchError((error){
-      print('error in get home Data${error.toString()}');
+      print('error in get home Data => ${error.toString()}');
       emit(AppLayoutErrorState(error.toString()));
     });
 }

@@ -28,6 +28,7 @@ class LoginCubit extends Cubit<LoginStates> {
         print(loginModel.status);
         print('login model taken in cubit = ');
         print(loginModel.data?.token);
+        print('login value in cubit = ');
         print(value);
         emit(LoginSuccessState(loginModel));
       },

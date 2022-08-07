@@ -24,7 +24,7 @@ class DioHelper {
       'User-Agent': 'PostmanRuntime/7.29.2',
       'Connection': 'keep-alive',
       'Accept': '*/*',
-      'Postman-Token': token ?? '',
+      'Authorization': token == null ? '' : 'Bearer $token',
     };
 
     return await dio.get(
@@ -45,7 +45,7 @@ class DioHelper {
       'User-Agent': 'PostmanRuntime/7.29.2',
       'Connection': 'keep-alive',
       'Accept': '*/*',
-      'Postman-Token': token ?? '',
+      'Authorization': token ?? '',
     };
 
     return await dio.post(
