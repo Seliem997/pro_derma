@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'dart:math' as math;
 
 import '../../../shared/components/components.dart';
 import '../../../shared/components/default_buttons.dart';
@@ -66,8 +65,6 @@ Widget serviceItem(BuildContext context, {
 // }
 Container buildCarouselSliderItem({
   required Color color,
-  required Color buttonColor,
-  required Color buttonTextColor,
   required String imageName,
   required String textHeader,
   required String textBody,
@@ -97,7 +94,7 @@ Container buildCarouselSliderItem({
               buildTextBody(
                 text: textBody,
                 fontSize: 11.sp,
-                maxLines: 3,
+                maxLines: 2,
                 isOverflew: true,
                 color: Colors.white,
                 isCenter: false,
@@ -109,11 +106,11 @@ Container buildCarouselSliderItem({
                   textData: 'Show Details',
                   height: 5.h,
                   width: 50.w,
-                  backgroundButton: buttonColor,
+                  backgroundButton: Colors.white,
                   isUpperCase: false,
                   radius: 16,
                   textSize: 12.sp,
-                  buttonTextColor: buttonTextColor,
+                  buttonTextColor: Colors.black,
                 ),
               ),
             ],
@@ -121,10 +118,13 @@ Container buildCarouselSliderItem({
         ),
        Expanded(
          flex: 3,
-         child: Image(
-           image: AssetImage("assets/images/$imageName.png"),
-           height: 18.h,
-           fit: BoxFit.fill,
+         child: Padding(
+           padding: const EdgeInsets.all(12.0),
+           child: Image(
+             image: AssetImage(imageName),
+             height: 18.h,
+               fit: BoxFit.contain,
+           ),
          ),
        ),
       ],

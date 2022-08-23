@@ -108,7 +108,8 @@ ThemeData darkTheme= ThemeData(
       unselectedItemColor: Colors.grey,
       elevation: 20.0,
       type: BottomNavigationBarType.fixed,
-      backgroundColor: kDefaultNightModeColor,
+      backgroundColor: Colors.red,
+
   ),
 
   textTheme: TextTheme(

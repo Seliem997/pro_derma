@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pro_derma/modules/login/cubit/states.dart';
 
+import '../../../layout/cubit/states.dart';
 import '../../../models/login_model.dart';
 import '../../../shared/network/end_points.dart';
 import '../../../shared/network/remote/dio_helper.dart';
@@ -42,6 +45,33 @@ class LoginCubit extends Cubit<LoginStates> {
       },
     );
   }
+/*
+
+  //--------------------------------- Google Sign in -------
+
+  final googleSignIn = GoogleSignIn();
+  GoogleSignInAccount? _user;
+  GoogleSignInAccount get user => _user!;
+
+  Future googleLogin() async{
+    final googleUser = await googleSignIn.signIn();
+    if(googleUser == null) return;
+
+    _user = googleUser;
+
+    final googleAuth = await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    await FirebaseAuth.instance.signInWithCredential(credential);
+
+    emit(SignInGoogleState());
+
+  }
+*/
 
   IconData suffixPasswordVisible= Icons.visibility_outlined ;
   bool isPassword= true;

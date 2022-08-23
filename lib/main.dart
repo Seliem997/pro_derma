@@ -1,8 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pro_derma/layout/app_layout_view.dart';
-import 'package:pro_derma/layout/cubit/app_layout_screen.dart';
 import 'package:pro_derma/layout/cubit/states.dart';
+import 'package:pro_derma/modules/login/login_view.dart';
 import 'package:pro_derma/modules/on_boarding/on_boarding_view.dart';
 import 'package:pro_derma/shared/network/local/cache_helper.dart';
 import 'package:pro_derma/shared/network/remote/dio_helper.dart';
@@ -11,8 +12,6 @@ import 'package:sizer/sizer.dart';
 
 import 'layout/cubit/cubit.dart';
 import 'modules/login/login_screen.dart';
-import 'modules/register/register_screen.dart';
-import 'modules/splash/widgets/splash_screen.dart';
 import 'shared/components/constants.dart';
 
 void main(context) async{
@@ -21,6 +20,8 @@ void main(context) async{
   await CacheHelper.init();
   DioHelper.init();
 
+  await Firebase.initializeApp();
+
   bool? darkFromShared = CacheHelper.returnData(key: 'isDarkMode');
   if(darkFromShared != null){
     isDarkMode = darkFromShared;
@@ -28,13 +29,13 @@ void main(context) async{
 
   String? onBoarding = CacheHelper.returnData(key: 'onBoarding');
   String? mainToken = CacheHelper.returnData(key: 'token') ;
-  print("tToo From shared is $mainToken");
+  print("tToken From shared is $mainToken");
   Widget startWidget;
   if( onBoarding != null ){
     if(mainToken != null ){
       startWidget = const AppLayoutView();
     }else{
-      startWidget = const LoginScreen();
+      startWidget = const LoginView();
     }
   }else{
     startWidget = const OnBoardingView();

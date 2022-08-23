@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "291183713511",
+    "project_id": "proderma-signin",
+    "storage_bucket": "proderma-signin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291183713511:android:380ae7fd079405619b5642",
+        "android_client_info": {
+          "package_name": "proderma.cosmetics.pro_derma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291183713511-vm43jasb0ii6lj07p0vv7o1eg0dksf6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAimjcTfIpq_Fs0LhtEfRiuw_dDkNcrRbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291183713511-vm43jasb0ii6lj07p0vv7o1eg0dksf6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

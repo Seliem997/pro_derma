@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pro_derma/layout/cubit/states.dart';
 import 'package:pro_derma/models/home_model.dart';
 import 'package:pro_derma/modules/cart/cart_view.dart';
@@ -10,6 +12,7 @@ import 'package:pro_derma/shared/network/end_points.dart';
 import 'package:pro_derma/shared/network/remote/dio_helper.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../models/login_model.dart';
 import '../../modules/home/home_view.dart';
 import '../../modules/profile/profile_view.dart';
 import '../../modules/settings/settings_view.dart';
@@ -37,6 +40,7 @@ class AppCubit extends Cubit<AppStates>{
 
     emit(AppChangeBottomState());
   }
+
 //-------------------------------------------- Get Data Of Product in Home Screen -------
 
   double xOffset= 0;

@@ -48,6 +48,8 @@ class RegisterCubit extends Cubit<RegisterStates>{
     });
   }
 
+
+// ---------------------------- change password visibility ---------------------
   IconData suffixPasswordVisible= Icons.visibility_outlined ;
   bool isPassword= true;
 

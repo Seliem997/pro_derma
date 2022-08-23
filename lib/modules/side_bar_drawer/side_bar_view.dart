@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pro_derma/modules/cart/cart_view.dart';
-import 'package:pro_derma/modules/favorite/favorite_view.dart';
-import 'package:pro_derma/modules/settings/settings_view.dart';
 import 'package:pro_derma/modules/side_bar_drawer/widgets/drawer_items.dart';
 import 'package:pro_derma/shared/components/components.dart';
-import 'package:pro_derma/shared/components/navigate.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../layout/cubit/cubit.dart';
+import '../../shared/components/constants.dart';
+import '../../shared/network/local/cache_helper.dart';
 import '../../shared/styles/colors.dart';
 
 class SideBarDrawerView extends StatelessWidget {
@@ -34,9 +32,23 @@ class SideBarDrawerView extends StatelessWidget {
                       child: Icon(Icons.person,color: Colors.white,size: 10.w),
                     ),
                     verticalSpace(2),
-                    Text('User Name',style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold,color: Colors.white),),
+                    Text(
+                      CacheHelper.returnData(key: 'user_name'),
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                      ),
+                    ),
                     verticalSpace(1),
-                    Text('User_Name@gmail.com',style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.normal,color: KColor.grayishBlue),),
+                    Text(
+                      CacheHelper.returnData(key: 'Email'),
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.normal,
+                          color: KColor.grayishBlue,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -69,7 +81,7 @@ class SideBarDrawerView extends StatelessWidget {
                 verticalSpace(3),
                 ItemDrawer(
                   itemIcon: Icons.settings,
-                  itemTextName: 'Setting',
+                  itemTextName: 'Settings',
                   onTap: (){
                     AppCubit.get(context).changeBottom(4);
                     AppCubit.get(context).changeSideBarDrawer();
@@ -77,15 +89,22 @@ class SideBarDrawerView extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: [
-                const Icon(Icons.logout),
-                horizontalSpace(2),
-                Text(
-                    'Log out',
-                    style: Theme.of(context).textTheme.subtitle1
-                ),
-              ],
+            GestureDetector(
+              onTap: (){
+                AppCubit.get(context).changeSideBarDrawer();
+                AppCubit.get(context).changeBottom(0);
+                signOut(context);
+              },
+              child: Row(
+                children: [
+                  const Icon(Icons.logout),
+                  horizontalSpace(2),
+                  Text(
+                      'Log out',
+                      style: Theme.of(context).textTheme.subtitle1
+                  ),
+                ],
+              ),
             ),
           ],
         ),

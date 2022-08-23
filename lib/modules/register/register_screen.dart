@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pro_derma/layout/app_layout_view.dart';
-import 'package:pro_derma/layout/cubit/app_layout_screen.dart';
+import 'package:pro_derma/layout/widgets/app_layout_screen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../shared/components/components.dart';
@@ -13,6 +13,7 @@ import '../../shared/components/show_toast.dart';
 import '../../shared/network/local/cache_helper.dart';
 import '../../shared/styles/colors.dart';
 import '../login/login_screen.dart';
+import '../login/login_view.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 
@@ -39,6 +40,12 @@ class RegisterScreen extends StatelessWidget {
               }
               showToast(message: 'Done', state: ToastStates.success);
 
+              CacheHelper.saveData(key: 'user_name', value: state.loginModel.data!.name);
+              print('cache helper save user name is =');
+              print(state.loginModel.data!.name);
+              CacheHelper.saveData(key: 'Email', value: state.loginModel.data!.email);
+              print('cache helper save email name is =');
+              print(state.loginModel.data!.email);
               CacheHelper.saveData(
                 key: 'token',
                 value: state.loginModel.data!.token,
@@ -244,7 +251,7 @@ class RegisterScreen extends StatelessWidget {
                       child: GestureDetector(
                         behavior: HitTestBehavior.translucent,
                         onTap: () {
-                          navigateTo(context, const LoginScreen());
+                          navigateTo(context, const LoginView());
                         },
                         child: RichText(
                             text: TextSpan(children: [

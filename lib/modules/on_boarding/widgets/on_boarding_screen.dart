@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pro_derma/modules/login/login_screen.dart';
+import 'package:pro_derma/modules/login/login_view.dart';
 import 'package:pro_derma/modules/on_boarding/widgets/page_view_items.dart';
 import 'package:pro_derma/shared/network/local/cache_helper.dart';
 import 'package:sizer/sizer.dart';
@@ -25,7 +26,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   void submit(){
     CacheHelper.saveData(key: 'onBoarding', value: 'true').then((value) {
       if(value){
-        navigateAndFinish(context, const LoginScreen());
+        navigateAndFinish(context, const LoginView());
       }
     });
 

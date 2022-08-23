@@ -3,11 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pro_derma/layout/app_layout_view.dart';
-import 'package:pro_derma/layout/cubit/app_layout_screen.dart';
+import 'package:pro_derma/layout/cubit/cubit.dart';
+import 'package:pro_derma/layout/widgets/app_layout_screen.dart';
 import 'package:pro_derma/shared/styles/colors.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../shared/components/components.dart';
+import '../../shared/components/constants.dart';
 import '../../shared/components/default_buttons.dart';
 import '../../shared/components/navigate.dart';
 import '../../shared/components/show_toast.dart';
@@ -35,6 +37,12 @@ class LoginScreen extends StatelessWidget {
                 print('token in login success when code 200 is =');
                 print(state.loginModel.data!.token);
               }
+              CacheHelper.saveData(key: 'user_name', value: state.loginModel.data!.name);
+              print('cache helper save user name is =');
+              print(state.loginModel.data!.name);
+              CacheHelper.saveData(key: 'Email', value: state.loginModel.data!.email);
+              print('cache helper save email name is =');
+              print(state.loginModel.data!.email);
               CacheHelper.saveData(
                 key: 'token',
                 value: state.loginModel.data!.token,
@@ -63,22 +71,6 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      /*Text(
-                        'Hello Again!',
-                        style: Theme.of(context).textTheme.headline4!.copyWith(
-                            color: Colors.black,
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      verticalSpace(3),
-                      Text(
-                        'Login now to browse our hot offer',
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle1!
-                            .copyWith(color: Colors.grey),
-                      ),
-                      verticalSpace(8),*/
                       verticalSpace(6),
                       Padding(
                         padding: EdgeInsets.only(left: 1.w,bottom: 2.h),
@@ -208,11 +200,16 @@ class LoginScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            'assets/images/google.png',
-                            height: 9.h,
-                            width: 12.w,
-                            fit: BoxFit.contain,
+                          GestureDetector(
+                            onTap: (){
+                              // LoginCubit.get(context).googleLogin();
+                            },
+                            child: Image.asset(
+                              'assets/images/google.png',
+                              height: 9.h,
+                              width: 12.w,
+                              fit: BoxFit.contain,
+                            ),
                           ),
                           horizontalSpace(3),
                           Image.asset(

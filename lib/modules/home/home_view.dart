@@ -7,41 +7,57 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../layout/cubit/cubit.dart';
 import '../../shared/components/components.dart';
+import '../../shared/network/local/cache_helper.dart';
 import '../../shared/styles/colors.dart';
 import 'widgets/home_screen.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+
+  @override
+  void initState(){
+    super.initState();
+    if(AppCubit.get(context).homeModel == null){
+      AppCubit.get(context).getHomeData(userToken: CacheHelper.returnData(key: 'token'));
+    }
+  }
+
+  @override
+
   Widget build(BuildContext context) {
-    var listController = PageController();
+    // var listController = PageController();
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          SmoothPageIndicator(
-            controller: listController,
-            count: 10,
-        effect: ScrollingDotsEffect(
-          activeStrokeWidth: 2.6,
-          activeDotScale: 1.3,
-          maxVisibleDots: 5,
-          radius: 8,
-          spacing: 10,
-          dotHeight: 12,
-          dotWidth: 12,
-        ),
-            // effect: ExpandingDotsEffect(
-            //   activeDotColor: kDefaultColor,
-            //   dotColor: Colors.orange.shade200,
-            //   dotHeight: 10,
-            //   dotWidth: 10,
-            //   expansionFactor: 4,
-            //   spacing: 2.w,
-            // ),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   actions: [
+      //     SmoothPageIndicator(
+      //       controller: listController,
+      //       count: 10,
+      //   effect: const ScrollingDotsEffect(
+      //     activeStrokeWidth: 2.6,
+      //     activeDotScale: 1.3,
+      //     maxVisibleDots: 5,
+      //     radius: 8,
+      //     spacing: 10,
+      //     dotHeight: 12,
+      //     dotWidth: 12,
+      //   ),
+      //       // effect: ExpandingDotsEffect(
+      //       //   activeDotColor: kDefaultColor,
+      //       //   dotColor: Colors.orange.shade200,
+      //       //   dotHeight: 10,
+      //       //   dotWidth: 10,
+      //       //   expansionFactor: 4,
+      //       //   spacing: 2.w,
+      //       // ),
+      //     ),
+      //   ],
+      // ),
       // body: ListView.builder(
       //   physics: const BouncingScrollPhysics(),
       //     controller: listController,
@@ -76,15 +92,16 @@ class HomeView extends StatelessWidget {
         builder: (context, state){
           var cubit= AppCubit.get(context);
           return ConditionalBuilder(
-            condition: cubit.homeModel != null /*|| cubit.dataString != null*/,
+            condition: cubit.homeModel != null,
             builder: (context) {
-              return PageView.builder(
-                physics: const BouncingScrollPhysics(),
-                controller: listController,
-                itemBuilder: (context, index) => const HomeScreen(),
-                itemCount: 10,
-                onPageChanged: (int index) {},
-              );
+              // return PageView.builder(
+              //   physics: const BouncingScrollPhysics(),
+              //   controller: listController,
+              //   itemBuilder: (context, index) => const HomeScreen(),
+              //   itemCount: 10,
+              //   onPageChanged: (int index) {},
+              // );
+              return HomeScreen(homeModel : cubit.homeModel!);
             },
             fallback: (context) => const Center(child: CircularProgressIndicator(),),
           );

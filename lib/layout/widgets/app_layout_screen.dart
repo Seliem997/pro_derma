@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../shared/network/local/cache_helper.dart';
-import 'cubit.dart';
-import 'states.dart';
+import '../cubit/cubit.dart';
+import '../cubit/states.dart';
 
 class AppLayoutScreen extends StatelessWidget {
   const AppLayoutScreen({Key? key}) : super(key: key);
@@ -20,6 +20,13 @@ class AppLayoutScreen extends StatelessWidget {
       builder: (context, state) {
 
         var cubit=AppCubit.get(context);
+        List<String> titles =[
+          'Pro Derma',
+          'Favorites',
+          'Cart',
+          'Profile',
+          'Settings'
+        ];
 
         return AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -39,8 +46,18 @@ class AppLayoutScreen extends StatelessWidget {
                 onPressed: (){
                   cubit.changeSideBarDrawer();
                 },
-                icon: const Icon(Icons.menu),
+                icon: Icon(Icons.menu,size: 18.sp),
               ),
+              title: Text(
+                titles[cubit.currentIndex],
+                style: const TextStyle(
+                  fontFamily: 'Poppins',
+                    fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.w500
+                ),
+              ),
+              centerTitle: true,
+
             ),
 
             body: cubit.bottomScreens[cubit.currentIndex],
@@ -48,18 +65,16 @@ class AppLayoutScreen extends StatelessWidget {
             bottomNavigationBar: SizedBox(
               width: double.infinity,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.h),
+                padding: EdgeInsets.symmetric(vertical: 0.5.h),
                 child: DotNavigationBar(
+                  itemPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   marginR: const EdgeInsets.symmetric(horizontal: 15),
                   backgroundColor: Colors.black,
                   margin: const EdgeInsets.symmetric(horizontal: 15),
                   currentIndex: AppCubit.get(context).currentIndex,
-                  dotIndicatorColor: Colors.transparent,
-                  unselectedItemColor: Colors.grey,
+                  dotIndicatorColor: Colors.blue,
+                  unselectedItemColor: Colors.blueGrey,
                   onTap: (index) {
-                    if(index ==0){
-                      AppCubit.get(context).getHomeData(userToken: CacheHelper.returnData(key: 'token'));
-                    }
                     AppCubit.get(context).changeBottom(index);
                   },
                   items: [
