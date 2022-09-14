@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:pro_derma/models/home_model.dart';
+import 'package:pro_derma/modules/details/details_view.dart';
+import 'package:pro_derma/shared/components/navigate.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../shared/components/components.dart';
@@ -65,10 +67,15 @@ Container buildPopularItemList(BuildContext context,DataProductsModel model) {
         horizontalSpace(2),
         IconButton(
           onPressed: (){
-
+            print(model.id);
+            navigateTo(context, DetailsView());
           },
-          icon: const Icon(
-            Icons.favorite_border_rounded,
+          icon: const CircleAvatar(
+            radius: 15,
+            backgroundColor: KColor.green,
+            child: Icon(
+              Icons.add_shopping_cart,
+            ),
           ),
         ),
 

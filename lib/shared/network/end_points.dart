@@ -4,6 +4,8 @@ const REGISTER = 'register';
 
 const HOME = 'products';
 
+const ADDTOCART = 'add-to-cart';
+
 //
 // const GET_CATEGORIES = 'categories';
 //

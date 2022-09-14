@@ -11,7 +11,7 @@ import 'package:pro_derma/shared/styles/themes.dart';
 import 'package:sizer/sizer.dart';
 
 import 'layout/cubit/cubit.dart';
-import 'modules/login/login_screen.dart';
+import 'modules/login/cubit/cubit.dart';
 import 'shared/components/constants.dart';
 
 void main(context) async{
@@ -53,8 +53,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => AppCubit()..changeAppMode(modeFromShared: isDarkMode)/*..getHomeData(userToken: tokenMain)*/,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+        create: (BuildContext context) => LoginCubit(),
+        ),
+        BlocProvider(
+        create: (BuildContext context) => AppCubit()..changeAppMode(modeFromShared: isDarkMode)/*..getHomeData(userToken: tokenMain)*/,
+        ),
+      ],
       child: BlocConsumer<AppCubit,AppStates>(
         listener: (context, state){},
         builder: (context, state) {

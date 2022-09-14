@@ -8,11 +8,13 @@ class AppLayoutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: const [
-        SideBarDrawerView(),
-        AppLayoutScreen(),
-      ],
+    return Scaffold(
+      body: Stack(
+        children: const [
+          SideBarDrawerView(),
+          AppLayoutScreen(),
+        ],
+      ),
     );
   }
 }

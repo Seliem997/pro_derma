@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pro_derma/modules/home/widgets/widgets.dart';
+import 'package:pro_derma/shared/components/constants.dart';
 import 'package:sizer/sizer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 

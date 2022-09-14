@@ -11,26 +11,26 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      // body: StreamBuilder(
-      //   stream: FirebaseAuth.instance.authStateChanges(),
-      //   builder: (context, snapshot){
-      //     if(snapshot.connectionState == ConnectionState.waiting){
-      //       return const Center(child: CircularProgressIndicator(),);
-      //     } else if(snapshot.hasData){
-      //       showToast(message: 'Login Success', state: ToastStates.success);
-      //       return const AppLayoutView();
-      //     }else if(snapshot.hasError){
-      //       showToast(message: 'Wrong', state: ToastStates.error);
-      //       return const ErrorPage();
-      //     } else{
-      //       return const LoginScreen();
-      //     }
-      //   },
-      // ),
+    return Scaffold(
+      body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot){
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator(),);
+          } else if(snapshot.hasData){
+            showToast(message: 'Login Success', state: ToastStates.success);
+            return const AppLayoutView();
+          }else if(snapshot.hasError){
+            showToast(message: 'Wrong', state: ToastStates.error);
+            return const ErrorPage();
+          } else{
+            return const LoginScreen();
+          }
+        },
+      ),
 
 
-      body: LoginScreen(),
+      // body: LoginScreen(),
     );
 
   }

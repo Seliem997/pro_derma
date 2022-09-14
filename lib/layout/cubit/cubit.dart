@@ -41,7 +41,7 @@ class AppCubit extends Cubit<AppStates>{
     emit(AppChangeBottomState());
   }
 
-//-------------------------------------------- Get Data Of Product in Home Screen -------
+//-------------------------------------------- changeSideBarDrawer -------
 
   double xOffset= 0;
   double yOffset= 0;
@@ -94,6 +94,26 @@ void getHomeData({String? userToken}){
     }).catchError((error){
       print('error in get home Data => ${error.toString()}');
       emit(AppLayoutErrorState(error.toString()));
+    });
+}
+
+//-------------------------------------------- Add products To Cart  -------
+
+
+void addProductsToCart({int? productId,String? userToken}){
+    emit(AppAddToCartLoadingState());
+
+    DioHelper.getData(url: '$ADDTOCART/$productId',token: userToken)
+        .then((value) {
+
+          print('Added To Cart Successfully');
+          print('value.data${value.data}');
+          print('value.data.toString()${value.data.toString()}');
+          emit(AppAddToCartSuccessStates());
+
+    }).catchError((error){
+      print('error in add to cart  => ${error.toString()}');
+      emit(AppAddToCartErrorState(error.toString()));
     });
 }
 

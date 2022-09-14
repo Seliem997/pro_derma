@@ -23,3 +23,15 @@ class AppLayoutErrorState extends AppStates {
   AppLayoutErrorState(this.error);
 
 }
+
+class AppAddToCartLoadingState extends AppStates{}
+
+class AppAddToCartSuccessStates extends AppStates {}
+
+class AppAddToCartErrorState extends AppStates {
+
+  final String error;
+
+  AppAddToCartErrorState(this.error);
+
+}

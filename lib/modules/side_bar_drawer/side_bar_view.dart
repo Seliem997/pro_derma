@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pro_derma/modules/login/cubit/cubit.dart';
 import 'package:pro_derma/modules/side_bar_drawer/widgets/drawer_items.dart';
 import 'package:pro_derma/shared/components/components.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../layout/cubit/cubit.dart';
 import '../../shared/components/constants.dart';
-import '../../shared/network/local/cache_helper.dart';
 import '../../shared/styles/colors.dart';
 
 class SideBarDrawerView extends StatelessWidget {
@@ -13,6 +13,7 @@ class SideBarDrawerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit= LoginCubit.get(context);
     return Scaffold(
       backgroundColor: KColor.primary,
       body: Padding(
@@ -33,7 +34,8 @@ class SideBarDrawerView extends StatelessWidget {
                     ),
                     verticalSpace(2),
                     Text(
-                      CacheHelper.returnData(key: 'user_name'),
+                      // CacheHelper.returnData(key: 'user_name'),
+                      userName==null ? cubit.user.displayName! : userName!,
                       style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
@@ -42,7 +44,8 @@ class SideBarDrawerView extends StatelessWidget {
                     ),
                     verticalSpace(1),
                     Text(
-                      CacheHelper.returnData(key: 'Email'),
+                      // CacheHelper.returnData(key: 'Email'),
+                      userEmail==null ? cubit.user.email : userEmail!,
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.normal,

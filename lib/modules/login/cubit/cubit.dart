@@ -45,7 +45,6 @@ class LoginCubit extends Cubit<LoginStates> {
       },
     );
   }
-/*
 
   //--------------------------------- Google Sign in -------
 
@@ -54,24 +53,40 @@ class LoginCubit extends Cubit<LoginStates> {
   GoogleSignInAccount get user => _user!;
 
   Future googleLogin() async{
-    final googleUser = await googleSignIn.signIn();
-    if(googleUser == null) return;
+    try{
+      final googleUser = await googleSignIn.signIn();
+      if(googleUser == null) return;
 
-    _user = googleUser;
+      _user = googleUser;
 
-    final googleAuth = await googleUser.authentication;
+      final googleAuth = await googleUser.authentication;
 
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-    await FirebaseAuth.instance.signInWithCredential(credential);
+      await FirebaseAuth.instance.signInWithCredential(credential);
 
-    emit(SignInGoogleState());
+      emit(SignInGoogleState());
+      return googleUser;
+
+
+    }catch (e){
+      print('Error object');
+      print(e.toString());
+    }
 
   }
-*/
+
+  //--------------------------------- Google Sign out -------
+
+  Future logOut() async{
+    await googleSignIn.disconnect();
+    FirebaseAuth.instance.signOut();
+  }
+
+  //--------------------------------- change Password Visibility -------
 
   IconData suffixPasswordVisible= Icons.visibility_outlined ;
   bool isPassword= true;
