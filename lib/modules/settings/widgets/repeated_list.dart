@@ -2,18 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:pro_derma/shared/styles/colors.dart';
+import 'package:sizer/sizer.dart';
 
 class RoundedLisTile extends StatelessWidget {
-  double width;
-  double height;
+  GestureTapCallback onTap;
   Color? leadingBackColor;
   IconData icon;
   String title;
   Widget trailing;
 
   RoundedLisTile({
-    required this.width,
-    required this.height,
+    required this.onTap,
     required this.leadingBackColor,
     required this.icon,
     required this.title,
@@ -23,12 +22,12 @@ class RoundedLisTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8),
         child: Container(
-          width: width,
-          height: height / 14,
+          width: 100.w,
+          height: 7.2.h,
           child: ListTile(
               leading: CircleAvatar(
                 backgroundColor: leadingBackColor,

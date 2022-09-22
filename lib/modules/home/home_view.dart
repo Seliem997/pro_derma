@@ -2,13 +2,9 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pro_derma/layout/cubit/states.dart';
-import 'package:sizer/sizer.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../layout/cubit/cubit.dart';
-import '../../shared/components/components.dart';
 import '../../shared/network/local/cache_helper.dart';
-import '../../shared/styles/colors.dart';
 import 'widgets/home_screen.dart';
 
 class HomeView extends StatefulWidget {

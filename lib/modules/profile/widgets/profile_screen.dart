@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pro_derma/modules/login/cubit/cubit.dart';
 import 'package:pro_derma/shared/components/components.dart';
 import 'package:pro_derma/shared/components/default_buttons.dart';
 import 'package:sizer/sizer.dart';
@@ -16,7 +15,6 @@ class ProfileScreen extends StatelessWidget {
     TextEditingController emailController = TextEditingController();
     TextEditingController phoneController = TextEditingController();
 
-    var cubit= LoginCubit.get(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -26,11 +24,11 @@ class ProfileScreen extends StatelessWidget {
             verticalSpace(2),
             Center(
               child: CircleAvatar(
-                  radius: 40,
+                  radius: 50,
                   backgroundImage: NetworkImage(
-                      cubit.user.toString() ==""
-                          ? 'https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556782.jpg?w=740&t=st=1663081245~exp=1663081845~hmac=1f94f7cc06bdcf51b4f3d2c4512cd879915e3706503b7432073d760d823dd335'
-                          : cubit.user.photoUrl!,
+                      userName==null
+                          ? socialUser.photoURL!
+                          : 'https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556782.jpg?w=740&t=st=1663081245~exp=1663081845~hmac=1f94f7cc06bdcf51b4f3d2c4512cd879915e3706503b7432073d760d823dd335',
                   ),
 /*
                   backgroundImage: AssetImage('assets/images/editProfile.png'),
@@ -50,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
             /// Profile Name
             Center(
                 child: Text(
-                  userName==null ? cubit.user.displayName! : userName!,
+                  userName==null ? socialUser.displayName! : userName!,
                   style: TextStyle(
                       fontSize: 16.sp
                   ) ,
@@ -70,30 +68,21 @@ class ProfileScreen extends StatelessWidget {
             const Text('Name'),
             verticalSpace(1),
             /// Name TextField
-            buildTextField(nameController,userName==null ? cubit.user.displayName! : userName!,context),
+            buildTextField(nameController,userName==null ? socialUser.displayName! : userName!,context),
             verticalSpace(3),
             const Text('Your Email'),
             verticalSpace(1),
             /// Email TextField
-            // buildTextField(emailController,userEmail==null ? socialUser.email! : userEmail! ,context),
-            buildTextField(emailController,userEmail==null ? cubit.user.email : userEmail! ,context),
+            buildTextField(emailController,userEmail==null ? socialUser.email! : userEmail! ,context),
             verticalSpace(3),
             const Text('Phone'),
             verticalSpace(1),
             /// Enter Phone TextField
-           /* buildTextField(
+            buildTextField(
               phoneController,
-              userPhone==null ? socialUser.phoneNumber! : userPhone!,
-               *//*if(userPhone== null){
-                if(socialUser.phoneNumber == null){
-                  return 'Enter Your Number';
-                }else {
-                  return socialUser.phoneNumber!;
-                }
-              }else{
-                return userPhone!
-              },*//*
-            context,),*/
+              userPhone==null ? socialUser.phoneNumber ==null ? 'Enter Your Number' : socialUser.phoneNumber! : userPhone!,
+              context,
+            ),
             verticalSpace(5),
             defaultButton(
               function: (){

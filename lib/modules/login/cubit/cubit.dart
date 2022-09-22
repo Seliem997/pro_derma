@@ -69,8 +69,6 @@ class LoginCubit extends Cubit<LoginStates> {
       await FirebaseAuth.instance.signInWithCredential(credential);
 
       emit(SignInGoogleState());
-      return googleUser;
-
 
     }catch (e){
       print('Error object');

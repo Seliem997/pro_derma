@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pro_derma/layout/cubit/cubit.dart';
+import 'package:pro_derma/models/cart_model.dart';
+import 'package:pro_derma/shared/network/local/cache_helper.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../shared/components/components.dart';
@@ -113,12 +116,12 @@ Widget buildCartCard(){
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.add),
+                      icon: const Icon(Icons.add),
                       onPressed: (){},
                     ),
                     IconButton(
                       onPressed: (){},
-                      icon: Icon(Icons.minimize),
+                      icon: const Icon(Icons.minimize),
                     )
                   ],
                 ),
@@ -158,38 +161,50 @@ Widget buildCartCard(){
   );
 }
 
-cartListView(width, height) {
+cartItem(context,CartData model) {
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 10),
-    width: width,
-    height: height / 5.2,
+    margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
+    padding: EdgeInsets.only(top: 1.h),
+    height: 20.h,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: const [
+        BoxShadow(
+          color: Colors.grey,
+          spreadRadius: 1,
+          blurRadius: 2,
+          offset: Offset(2, 2),
+        ),
+      ],
+    ),
     // color: Colors.blue,
     child: Row(
       children: [
-        Container(
+        SizedBox(
           // color: Colors.green,
-          width: width / 2.8,
-          height: height / 5.7,
+          width: 33.w,
+          height: 21.h,
           child: Stack(clipBehavior: Clip.none,
               children: [
             Positioned(
               top: 20,
               left: 10,
               child: Container(
-                width: width / 3.6,
-                height: height / 7.1,
+                width: 27.w,
+                height: 14.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
                   color: Colors.grey[400],
                 ),
               ),
             ),
-            Positioned(
+            const Positioned(
                 right: 13,
-                bottom: 25,
+                bottom: 20,
                 child: RotationTransition(
                   turns: AlwaysStoppedAnimation(-30 / 360),
-                  child: Container(
+                  child: SizedBox(
                     width: 150,
                     height: 150,
                     child: Image(
@@ -208,80 +223,76 @@ cartListView(width, height) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Item Name',
+                model.product!,
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(
-                height: 4,
-              ),
+             verticalSpace(0.3),
               Text(
-                "\$100",
+                model.productId!,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.bold,
                   color:  Colors.black,
                 ),
               ),
-              SizedBox(
-                height: 10,
+              verticalSpace(.5),
+              Text(
+                'total = ${int.parse(model.productId!)*int.parse(model.quantity!)}',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color:  Colors.black,
+                ),
               ),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      /*setState(() {
-                        bgmodel.numOfShoe--;
-                        bagModels.remove(bgmodel);
-                        numOfItems = bagModels.length;
-                      });*/
-                    },
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[300],
-                      ),
-                      child: Center(
-                          child: Icon(
-                            Icons.remove,
-                            size: 15,
-                          )),
-                    ),
+            ],
+          ),
+        ),
+        const Spacer(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 2.w,vertical:3.h ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey[300],
                   ),
-                  SizedBox(
-                    width: 10,
+                  child: const Center(
+                      child: Icon(
+                        Icons.remove,
+                        size: 15,
+                      )),
+                ),
+              ),
+              Text(
+                model.quantity!,
+                style: const TextStyle(
+                    fontSize: 17, fontWeight: FontWeight.bold),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey[300],
                   ),
-                  Text(
-                    '2',
-                    style: TextStyle(
-                        fontSize: 17, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[300],
-                      ),
-                      child: Center(
-                          child: Icon(
-                            Icons.add,
-                            size: 15,
-                          )),
-                    ),
-                  ),
-                ],
-              )
+                  child: const Center(
+                      child: Icon(
+                        Icons.add,
+                        size: 15,
+                      )),
+                ),
+              ),
             ],
           ),
         ),

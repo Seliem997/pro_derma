@@ -1,11 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:pro_derma/layout/cubit/cubit.dart';
 import 'package:pro_derma/models/home_model.dart';
 import 'package:pro_derma/modules/details/details_view.dart';
 import 'package:pro_derma/shared/components/navigate.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../shared/components/components.dart';
+import '../../../shared/network/local/cache_helper.dart';
 import '../../../shared/styles/colors.dart';
 
 
@@ -68,6 +70,13 @@ Container buildPopularItemList(BuildContext context,DataProductsModel model) {
         IconButton(
           onPressed: (){
             print(model.id);
+            /*AppCubit.get(context)
+                .addProductsToCart(
+                  productId: model.id,
+                  // userToken: 'Bearer 3|rzA303Gi8a3EAHDaBQ3Y4dFNCJFNMrXwvjtpHrmY',
+                  userToken: CacheHelper.returnData(key: 'token'),
+            );*/
+            print(' done from list view ');
             navigateTo(context, DetailsView());
           },
           icon: const CircleAvatar(

@@ -26,6 +26,7 @@ String? userName= CacheHelper.returnData(key: 'user_name');
 String? userEmail= CacheHelper.returnData(key: 'Email');
 String? userPhone= CacheHelper.returnData(key: 'phone');
 
-// final User socialUser= FirebaseAuth.instance.currentUser!;
-// final dynamic socialUser= '';
+final User socialUser= FirebaseAuth.instance.currentUser!;
+
+String languageCode = CacheHelper.returnData(key: 'lang');
 

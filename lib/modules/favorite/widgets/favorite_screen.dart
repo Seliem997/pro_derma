@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro_derma/shared/components/applocal.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../layout/cubit/cubit.dart';
@@ -21,7 +22,7 @@ class FavoriteScreen extends StatelessWidget {
               signOut(context);
             },
             child: Text(
-              'Favorite Screen',
+              'Favorite ${getLang(context, 'home')}',
               style: TextStyle(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
@@ -35,6 +36,13 @@ class FavoriteScreen extends StatelessWidget {
             AppCubit.get(context).changeAppMode();
           },
           icon: const Icon(Icons.brightness_4_outlined),
+        ),
+        verticalSpace(5),
+        IconButton(
+          onPressed: (){
+            // AppCubit.get(context).changeAppMode();
+          },
+          icon: const Icon(Icons.language),
         ),
       ],
     );

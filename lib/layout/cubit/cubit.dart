@@ -1,18 +1,18 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pro_derma/layout/cubit/states.dart';
+import 'package:pro_derma/models/cart_model.dart';
 import 'package:pro_derma/models/home_model.dart';
 import 'package:pro_derma/modules/cart/cart_view.dart';
 import 'package:pro_derma/modules/favorite/favorite_view.dart';
+import 'package:pro_derma/shared/components/show_toast.dart';
 import 'package:pro_derma/shared/network/end_points.dart';
 import 'package:pro_derma/shared/network/remote/dio_helper.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../models/login_model.dart';
+import '../../l10n/l10n.dart';
 import '../../modules/home/home_view.dart';
 import '../../modules/profile/profile_view.dart';
 import '../../modules/settings/settings_view.dart';
@@ -60,6 +60,7 @@ class AppCubit extends Cubit<AppStates>{
       emit(AppChangeDrawerState());
     }
   }
+
 //---------------------------------------------- Change App Mode To Dark Mode -------------
   bool isDark = false;
 
@@ -89,7 +90,7 @@ void getHomeData({String? userToken}){
           print('homeModel!.dataModel[0].title${homeModel!.dataModel[0].title}');
           print('value.data${value.data}');
           print('value.data.toString()${value.data.toString()}');
-          emit(AppLayoutSuccessStates());
+          emit(AppLayoutSuccessState());
 
     }).catchError((error){
       print('error in get home Data => ${error.toString()}');
@@ -106,15 +107,91 @@ void addProductsToCart({int? productId,String? userToken}){
     DioHelper.getData(url: '$ADDTOCART/$productId',token: userToken)
         .then((value) {
 
-          print('Added To Cart Successfully');
+          print('Added To Cart in cubit Successfully');
           print('value.data${value.data}');
           print('value.data.toString()${value.data.toString()}');
-          emit(AppAddToCartSuccessStates());
+          emit(AppAddToCartSuccessState());
+          showToast(message: value.data.toString(), state: ToastStates.success);
+          getCartData(userToken: userToken);
 
     }).catchError((error){
       print('error in add to cart  => ${error.toString()}');
       emit(AppAddToCartErrorState(error.toString()));
     });
 }
+
+
+//-------------------------------------------- Get Data Of Products in Cart Screen -------
+
+  CartModel? cartModel;
+  void getCartData({String? userToken}){
+    emit(AppCartLoadingState());
+
+    DioHelper.getData(url: CART,token: userToken)
+        .then((value) {
+      cartModel = CartModel.fromJson(value.data);
+      print('cartModel.toString()${cartModel.toString()}');
+      print('cartModel!.dataModel[0].title${cartModel!.data[0].productId}');
+      print('value.data${value.data}');
+      print('value.data.toString()${value.data.toString()}');
+      emit(AppCartSuccessState());
+
+    }).catchError((error){
+      print('error in get cart Data => ${error.toString()}');
+      emit(AppCartErrorState(error.toString()));
+    });
+  }
+
+//-------------------------------------------- Delete Data Of Products in Cart Screen -------
+
+
+  void deleteProductsInCart({String? productId,String? userToken}){
+    emit(AppDeleteFromCartLoadingState());
+
+    DioHelper.getData(url: '$DELETEFROMCART/$productId',token: userToken)
+        .then((value) {
+      getCartData(userToken: userToken); //================ Take Care of it When Run
+      print('delete from Cart in cubit Successfully');
+      print('value.data${value.data}');
+      print('value.data.toString()${value.data.toString()}');
+      emit(AppDeleteFromCartSuccessState());
+      showToast(message: value.data.toString(), state: ToastStates.success);
+
+
+    }).catchError((error){
+      print('error in delete from cart  => ${error.toString()}');
+      emit(AppDeleteFromCartErrorState(error.toString()));
+    });
+  }
+
+//---------------------------------------------- Change Language -------------
+/*
+String lang = 'en';
+void changeLanguage({String? langFromShared}){
+  if(langFromShared != null){
+    lang = langFromShared;
+    emit(AppChangeLanguageState());
+  }else {
+    lang = 'ar';
+  }
+}
+*/
+
+  Locale _locale = const Locale('en');
+
+Locale get locale => _locale;
+
+void setLocale(Locale locale){
+  if(!L10n.all.contains(locale)) return;
+  _locale = locale;
+  CacheHelper.saveData(key: 'lang', value: locale.languageCode);
+  emit(AppChangeLanguageState());
+}
+
+  void clearLocale(){
+    _locale= const Locale('en');
+    emit(AppChangeLanguageState());
+  }
+
 
 }

@@ -13,7 +13,6 @@ class SideBarDrawerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit= LoginCubit.get(context);
     return Scaffold(
       backgroundColor: KColor.primary,
       body: Padding(
@@ -29,13 +28,13 @@ class SideBarDrawerView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      radius: 50,
+                      radius: 40,
                       child: Icon(Icons.person,color: Colors.white,size: 10.w),
                     ),
                     verticalSpace(2),
                     Text(
                       // CacheHelper.returnData(key: 'user_name'),
-                      userName==null ? cubit.user.displayName! : userName!,
+                      userName==null ? socialUser.displayName! : userName!,
                       style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
@@ -45,7 +44,7 @@ class SideBarDrawerView extends StatelessWidget {
                     verticalSpace(1),
                     Text(
                       // CacheHelper.returnData(key: 'Email'),
-                      userEmail==null ? cubit.user.email : userEmail!,
+                      userEmail==null ? socialUser.email! : userEmail!,
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.normal,

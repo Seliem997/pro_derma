@@ -6,6 +6,10 @@ const HOME = 'products';
 
 const ADDTOCART = 'add-to-cart';
 
+const CART = 'my-cart';
+
+const DELETEFROMCART = 'remove-from-cart';
+
 //
 // const GET_CATEGORIES = 'categories';
 //

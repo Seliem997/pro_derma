@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pro_derma/modules/home/widgets/widgets.dart';
-import 'package:pro_derma/shared/components/constants.dart';
 import 'package:sizer/sizer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../../models/home_model.dart';
 import '../../../shared/components/components.dart';
 import 'list_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key,required this.homeModel}) : super(key: key);
@@ -74,8 +75,8 @@ class HomeScreen extends StatelessWidget {
             ),
             verticalSpace(2),
             Text(
-              'Categories',
-              style: Theme.of(context).textTheme.bodyText2,
+                AppLocalizations.of(context)!.categories,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             verticalSpace(1),
             SizedBox(
@@ -90,9 +91,9 @@ class HomeScreen extends StatelessWidget {
             verticalSpace(2),
             Text(
               'Popular',
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
-            verticalSpace(1),
+            verticalSpace(.5),
             ListView.builder(
               itemBuilder: ((context, index) => buildPopularItemList(context,homeModel.dataModel[index])),
               itemCount: homeModel.dataModel.length,
