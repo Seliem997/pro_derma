@@ -69,6 +69,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Popular`
+  String get popular {
+    return Intl.message(
+      'Popular',
+      name: 'popular',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

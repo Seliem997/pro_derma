@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro_derma/layout/cubit/cubit.dart';
 import 'package:pro_derma/modules/details/widgets/appbar.dart';
 import 'package:pro_derma/modules/details/widgets/details_screen.dart';
 
@@ -10,7 +11,7 @@ class DetailsView extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: customAppBarDe(context),
-      body: const DetailsScreen(),
+      body: DetailsScreen(model: AppCubit.get(context).detailsModel!),
     );
   }
 }

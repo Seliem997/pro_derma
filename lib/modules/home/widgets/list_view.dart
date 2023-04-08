@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pro_derma/layout/cubit/cubit.dart';
-import 'package:pro_derma/models/home_model.dart';
+import 'package:pro_derma/models/products/home_model.dart';
 import 'package:pro_derma/modules/details/details_view.dart';
 import 'package:pro_derma/shared/components/navigate.dart';
 import 'package:sizer/sizer.dart';
@@ -35,8 +35,9 @@ Container buildPopularItemList(BuildContext context,DataProductsModel model) {
       children: [
         SizedBox(
           width: 25.w,
-          child: Image(
-            image: AssetImage(model.desc!),
+          child: const Image(
+            image: NetworkImage('https://i.pinimg.com/564x/6a/da/6c/6ada6c337b9ce083435ab1953605ab9a.jpg'),
+            // image: AssetImage(model.desc!),
             // image: AssetImage('assets/images/on_boarding2.jpg'),
             fit: BoxFit.cover,
           ),
@@ -77,7 +78,11 @@ Container buildPopularItemList(BuildContext context,DataProductsModel model) {
                   userToken: CacheHelper.returnData(key: 'token'),
             );*/
             print(' done from list view ');
-            navigateTo(context, DetailsView());
+            AppCubit.get(context).addProductsToCart(
+              productId: 2,
+              userToken: CacheHelper.returnData(key: 'token'),
+            );
+            // navigateTo(context, DetailsView());
           },
           icon: const CircleAvatar(
             radius: 15,

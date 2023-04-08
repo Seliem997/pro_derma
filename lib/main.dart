@@ -6,14 +6,12 @@ import 'package:pro_derma/layout/app_layout_view.dart';
 import 'package:pro_derma/layout/cubit/states.dart';
 import 'package:pro_derma/modules/login/login_view.dart';
 import 'package:pro_derma/modules/on_boarding/on_boarding_view.dart';
-import 'package:pro_derma/shared/components/applocal.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pro_derma/shared/network/local/cache_helper.dart';
 import 'package:pro_derma/shared/network/remote/dio_helper.dart';
 import 'package:pro_derma/shared/styles/themes.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'l10n/l10n.dart';
 import 'layout/cubit/cubit.dart';
 import 'modules/login/cubit/cubit.dart';
 import 'shared/components/constants.dart';
@@ -70,9 +68,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (BuildContext context) => AppCubit()
             ..changeAppMode(modeFromShared: isDarkMode)
-            ..getCartData(
+            /*..getCartData(
               userToken: CacheHelper.returnData(key: 'token'),
-            ) /*..getHomeData(userToken: tokenMain)*/,
+            )*/ /*..getHomeData(userToken: tokenMain)*/,
         ),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
@@ -92,7 +90,7 @@ class MyApp extends StatelessWidget {
               // home: onBoarding ? const LoginScreen() : const OnBoardingView(),
               home: startWidget,
 
-    //********************* Change language*-----------------------------------
+              //********************* Change language*-----------------------------------
               /* localizationsDelegates: const [
                 AppLocale.delegate,
                 GlobalMaterialLocalizations.delegate,
@@ -114,15 +112,20 @@ class MyApp extends StatelessWidget {
                 }
                 return supportLang.first;
               },*/
-              supportedLocales: L10n.all,
+              // localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              // supportedLocales: L10n.all,
+              // supportedLocales: S.delegate.supportedLocales,
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              locale: CacheHelper.returnData(key: 'lang') == 'en' ? const Locale('en','') : const Locale('ar',''),
-
+              locale: const Locale('en', ''),
+              /*locale: CacheHelper.returnData(key: 'lang') == 'en'
+                  ? const Locale('en', '')
+                  : const Locale('ar', ''),*/
             );
           });
         },

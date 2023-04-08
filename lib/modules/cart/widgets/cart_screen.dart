@@ -95,7 +95,10 @@ class CartScreen extends StatelessWidget {
                     ),
                     verticalSpace(0.5),
                     const Text(
-                      '325.7\$'
+                      '325.7 \$',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
                   ],
                 ),

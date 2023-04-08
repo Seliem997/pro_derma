@@ -22,7 +22,7 @@ class AppLayoutScreen extends StatelessWidget {
         var cubit=AppCubit.get(context);
         List<String> titles =[
           'Pro Derma',
-          'Favorites',
+          // 'Favorites',
           'Cart',
           'Profile',
           'Settings'
@@ -67,6 +67,7 @@ class AppLayoutScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 0.5.h),
                 child: DotNavigationBar(
+                  enablePaddingAnimation: false,
                   itemPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   marginR: const EdgeInsets.symmetric(horizontal: 15),
                   backgroundColor: Colors.black,
@@ -82,10 +83,10 @@ class AppLayoutScreen extends StatelessWidget {
                       icon: const Icon(Icons.home_outlined),
                       selectedColor: Colors.white,
                     ),
-                    DotNavigationBarItem(
-                      icon: const Icon(Icons.favorite_border_rounded),
-                      selectedColor: Colors.white,
-                    ),
+                    // DotNavigationBarItem(
+                    //   icon: const Icon(Icons.favorite_border_rounded),
+                    //   selectedColor: Colors.white,
+                    // ),
                     DotNavigationBarItem(
                       icon: const Icon(Icons.shopping_cart_outlined),
                       selectedColor: Colors.white,

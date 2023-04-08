@@ -4,11 +4,19 @@ const REGISTER = 'register';
 
 const HOME = 'products';
 
+const PRODUCTDETAILS = 'product';
+
 const ADDTOCART = 'add-to-cart';
 
 const CART = 'my-cart';
 
 const DELETEFROMCART = 'remove-from-cart';
+
+const MYORDERS = 'my-orders';
+
+const CHECKOUT = 'checkout';
+
+const CANCELORDER = 'cancel-order';
 
 //
 // const GET_CATEGORIES = 'categories';

@@ -1,9 +1,10 @@
 {
+
 "language": "language",
     "@language": {
       "description": "The current language"
     },
-"categories": "Categories"
-
+"categories": "Categories",
+"popular": "Popular"
 
 }

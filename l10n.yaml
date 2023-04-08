@@ -1,3 +1,10 @@
 arb-dir: lib/l10n
 template-arb-file: intl_en.arb
 output-localization-file: app_localizations.dart
+
+#
+#output-dir: lib/generated/intl
+#output-localization-file: l10n.dart
+#output-class: S
+#synthetic-package: false
+#nullable-getter: false

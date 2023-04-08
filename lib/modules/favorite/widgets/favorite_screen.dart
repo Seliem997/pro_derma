@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pro_derma/shared/components/applocal.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../layout/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/components/constants.dart';
+import '../../../shared/network/local/cache_helper.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class FavoriteScreen extends StatelessWidget {
               signOut(context);
             },
             child: Text(
-              'Favorite ${getLang(context, 'home')}',
+              'Favorite ',
               style: TextStyle(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
@@ -40,7 +40,7 @@ class FavoriteScreen extends StatelessWidget {
         verticalSpace(5),
         IconButton(
           onPressed: (){
-            // AppCubit.get(context).changeAppMode();
+            AppCubit.get(context).getMyOrdersData(userToken: CacheHelper.returnData(key: 'token'));
           },
           icon: const Icon(Icons.language),
         ),

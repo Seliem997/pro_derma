@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:pro_derma/layout/cubit/cubit.dart';
 import 'package:pro_derma/modules/home/widgets/widgets.dart';
 import 'package:sizer/sizer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
-import '../../../models/home_model.dart';
-import '../../../shared/components/components.dart';
-import 'list_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../models/products/home_model.dart';
+import '../../../shared/components/components.dart';
+import '../../../shared/components/navigate.dart';
+import '../../../shared/network/local/cache_helper.dart';
+import '../../details/details_view.dart';
+import 'list_view.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key,required this.homeModel}) : super(key: key);
+  const HomeScreen({Key? key, required this.homeModel}) : super(key: key);
 
   final HomeModel homeModel;
   @override
   Widget build(BuildContext context) {
-
     return Padding(
-      padding: EdgeInsetsDirectional.only(start: 3.w, end: 2.w,),
+      padding: EdgeInsetsDirectional.only(
+        start: 3.w,
+        end: 2.w,
+      ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,8 +79,8 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             verticalSpace(2),
-            Text(
-                AppLocalizations.of(context)!.categories,
+            /*Text(
+              AppLocalizations.of(context)!.categories,
               style: Theme.of(context).textTheme.bodyText1,
             ),
             verticalSpace(1),
@@ -88,14 +93,23 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
               ),
             ),
-            verticalSpace(2),
+            verticalSpace(2),*/
             Text(
-              'Popular',
+              AppLocalizations.of(context)!.popular,
               style: Theme.of(context).textTheme.bodyText1,
             ),
             verticalSpace(.5),
             ListView.builder(
-              itemBuilder: ((context, index) => buildPopularItemList(context,homeModel.dataModel[index])),
+              itemBuilder: ((context, index) => GestureDetector(
+                  onTap: () {
+                    AppCubit.get(context).getProductDetails(
+                        productId: homeModel.dataModel[index].id,
+                        userToken: CacheHelper.returnData(key: 'token'),
+                    );
+                    navigateTo(context, const DetailsView());
+                  },
+                  child: buildPopularItemList(
+                      context, homeModel.dataModel[index]))),
               itemCount: homeModel.dataModel.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -106,32 +120,29 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }
 
 List<Widget> itemsCarouselList = [
-
   buildCarouselSliderItem(
     color: const Color(0xFF39A1D9),
     imageName: 'assets/images/pump_foam.jpg',
     textHeader: 'Pump Foam Brush',
     textBody: 'Discover the special packages now, especially for you',
-    onTap: (){},
+    onTap: () {},
   ),
   buildCarouselSliderItem(
     color: const Color(0xFFF99E02),
     imageName: 'assets/images/black_pump.jpg',
     textHeader: 'Black Pump',
     textBody: 'Gain Business awareness',
-    onTap: (){},
+    onTap: () {},
   ),
   buildCarouselSliderItem(
     color: const Color(0xFF39D9D9),
     imageName: 'assets/images/on_boarding2.jpg',
     textHeader: 'Smart Home',
-    textBody: 'A professional installation at no cost to you to work in the way that best suits your needs.',
-    onTap: (){},
+    textBody:
+        'A professional installation at no cost to you to work in the way that best suits your needs.',
+    onTap: () {},
   ),
-
 ];

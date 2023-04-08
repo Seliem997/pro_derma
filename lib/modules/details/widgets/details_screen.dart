@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pro_derma/layout/cubit/cubit.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../models/products/products_details_model.dart';
 import '../../../shared/network/local/cache_helper.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({Key? key}) : super(key: key);
-
+  const DetailsScreen({Key? key,required this.model}) : super(key: key);
+  final ProductsDetailsModel model;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -158,17 +159,18 @@ class DetailsScreen extends StatelessWidget {
   nameAndPrice() {
     return Row(
       children: [
-        const Text(
-          'Pump Foam',
-          style: TextStyle(
+        Text(
+          // 'Pump Foam',
+          model.data!.title!,
+          style: const TextStyle(
             fontSize: 21,
             fontWeight: FontWeight.bold,
             color: Colors.blue,
           ),
         ),
         Expanded(child: Container()),
-        const Text(
-          '\$47',
+        Text(
+          '\$${model.data!.price}',
           style: TextStyle(
             fontSize: 21,
             fontWeight: FontWeight.bold,

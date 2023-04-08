@@ -162,6 +162,7 @@ Widget buildCartCard(){
 }
 
 cartItem(context,CartData model) {
+  int subTotal= int.parse(model.productId!)*int.parse(model.quantity!);
   return Container(
     margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
     padding: EdgeInsets.only(top: 1.h),
@@ -241,7 +242,7 @@ cartItem(context,CartData model) {
               ),
               verticalSpace(.5),
               Text(
-                'total = ${int.parse(model.productId!)*int.parse(model.quantity!)}',
+                'total = $subTotal',
                 style: TextStyle(
                   fontSize: 14.sp,
                   color:  Colors.black,

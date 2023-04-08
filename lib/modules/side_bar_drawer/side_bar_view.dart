@@ -21,7 +21,7 @@ class SideBarDrawerView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width,
+              // width: MediaQuery.of(context).size.width,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(  //هنا بقي العمود الصغير المحتوي علي الصورة والاسم
@@ -63,14 +63,14 @@ class SideBarDrawerView extends StatelessWidget {
                   onTap: (){},
                 ),
                 verticalSpace(3),
-                ItemDrawer(
-                  itemIcon: Icons.favorite,
-                  itemTextName: 'Favorite',
-                  onTap: (){
-                    AppCubit.get(context).changeBottom(1);
-                    AppCubit.get(context).changeSideBarDrawer();
-                  },
-                ),
+                // ItemDrawer(
+                //   itemIcon: Icons.favorite,
+                //   itemTextName: 'Favorite',
+                //   onTap: (){
+                //     AppCubit.get(context).changeBottom(1);
+                //     AppCubit.get(context).changeSideBarDrawer();
+                //   },
+                // ),
                 verticalSpace(3),
                 ItemDrawer(
                   itemIcon: Icons.bookmark,

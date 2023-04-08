@@ -151,8 +151,8 @@ Widget defaultBorderButtonWithIcon({
       label:  Text(isUpperCase ? labelText.toUpperCase() : labelText),
       icon: icon,
       style: ElevatedButton.styleFrom(
-          primary: backgroundButton ?? kDefaultColor,
-          onPrimary: textColor ?? kDefaultSecondColor,
+          foregroundColor: textColor ?? kDefaultSecondColor,
+          backgroundColor: backgroundButton ?? kDefaultColor,
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(50),
           ),
